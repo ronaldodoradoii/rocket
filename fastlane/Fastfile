@@ -1,0 +1,46 @@
+default_platform(:ios)
+
+def kill_all_simulators
+	`osascript -e 'tell application "iOS Simulator" to quit'`
+	`osascript -e 'tell application "Simulator" to quit'`
+	sh 'xcrun simctl shutdown all'
+	sh '/usr/bin/killall "Simulator"; echo "Killing simulator"'
+    `xcrun simctl erase all 2> /dev/null`
+end
+
+def kill_xcode
+	begin
+		kill_xcode = sh("pkill Xcode")
+	rescue => ex
+   		UI.message("Xcode is already closed.")
+	end
+end
+
+def clear_derived_data
+	# clear_derived_data(
+	# 	derived_data_path: 'DerivedData'
+	# )
+end
+
+before_all do	
+    kill_all_simulators
+    kill_xcode
+    clear_derived_data
+end
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :test do
+
+  	scan(
+			workspace: "groot.xcworkspace",
+			scheme: "groot",
+			clean: true,
+			device: "iPhone 6s Plus",
+			skip_build: true,
+			code_coverage: false,
+			output_style: "basic",
+			output_types: "junit"
+		)
+  end
+end

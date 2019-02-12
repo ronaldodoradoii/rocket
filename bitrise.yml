@@ -1,0 +1,38 @@
+---
+format_version: '4'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+trigger_map:
+- push_branch: "*"
+  workflow: primary
+- pull_request_source_branch: "*"
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - script:
+        title: Hello Bitrise Local!
+        inputs:
+        - content: |-
+            #!/bin/bash
+            echo " ======== Welcome to Bitrise Local yml !"
+    - xcode-test@2.1.1:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - simulator_device: iPhone X
+        - simulator_os_version: '12.1'
+        - scheme: "$BITRISE_SCHEME"
+    meta:
+      bitrise.io:
+        stack: osx-xcode-10.1.x
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: starlord.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: starlord
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: development

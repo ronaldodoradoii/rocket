@@ -36,7 +36,7 @@ platform :ios do
 			workspace: "groot.xcworkspace",
 			scheme: "groot",
 			clean: true,
-			device: "iPhone 7s Plus",
+			device: "iPhone 7 Plus",
 			skip_build: true,
 			code_coverage: false,
 			output_style: "basic",

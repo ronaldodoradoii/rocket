@@ -16,12 +16,17 @@ workflows:
         - content: |-
             #!/bin/bash
             echo " ======== Welcome to Bitrise Local yml !"
+    - cocoapods-install: {}
     - xcode-test@2.1.1:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
         - simulator_device: iPhone X
         - simulator_os_version: '12.1'
         - scheme: "$BITRISE_SCHEME"
+    - fastlane@2.3.12:
+        inputs:
+        - lane: test
+        is_always_run: true
     meta:
       bitrise.io:
         stack: osx-xcode-10.1.x

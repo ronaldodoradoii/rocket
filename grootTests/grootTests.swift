@@ -16,7 +16,6 @@ class grootTests: XCTestCase {
     override func tearDown() { }
 
     func testExample() {
-        XCTFail()
     }
 
     func testPerformanceExample() {

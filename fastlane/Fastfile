@@ -23,24 +23,31 @@ def clear_derived_data
 end
 
 before_all do	
-    kill_all_simulators
-    kill_xcode
-    clear_derived_data
+    # kill_all_simulators
+    # kill_xcode
+    # clear_derived_data
 end
 
 platform :ios do
   desc "Description of what the lane does"
   lane :test do
 
-  	scan(
-			workspace: "groot.xcworkspace",
-			scheme: "groot",
-			clean: true,
-			device: "iPhone 7 Plus",
-			skip_build: true,
-			code_coverage: false,
-			output_style: "basic",
-			output_types: "junit"
+  # 	scan(
+		# 	workspace: "groot.xcworkspace",
+		# 	scheme: "groot",
+		# 	clean: true,
+		# 	device: "iPhone 7 Plus",
+		# 	skip_build: true,
+		# 	code_coverage: false,
+		# 	output_style: "basic",
+		# 	output_types: "junit"
+		# )
+
+  	danger(
+  			danger_id: "danger-test",
+  			dangerfile: "Dangerfile",
+  			github_api_token: ENV["DANGER_GITHUB_API_TOKEN"],
+  			verbose: true
 		)
   end
 end

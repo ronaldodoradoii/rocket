@@ -43,11 +43,12 @@ platform :ios do
 		# 	output_types: "junit"
 		# )
 
-  	danger(
-  			danger_id: "danger-test",
-  			dangerfile: "Dangerfile",
-  			github_api_token: ENV["DANGER_GITHUB_API_TOKEN"],
-  			verbose: true
-		)
+  # 	danger(
+  # 			danger_id: "danger-test",
+  # 			dangerfile: "Dangerfile",
+  # 			github_api_token: ENV["DANGER_GITHUB_API_TOKEN"],
+  # 			verbose: true
+		# )
+		sh("bundle exec danger")
   end
 end
